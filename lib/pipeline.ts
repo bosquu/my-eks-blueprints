@@ -15,7 +15,11 @@ export default class PipelineConstruct extends Construct {
     const blueprint = blueprints.EksBlueprint.builder()
     .account(account)
     .region(region)
-    .addOns(new blueprints.ClusterAutoScalerAddOn, new blueprints.CoreDnsAddOn)
+    .addOns(
+            new blueprints.ClusterAutoScalerAddOn, 
+            new blueprints.CoreDnsAddOn,
+            new blueprints.KubeviousAddOn()
+            )
     .teams(new TeamPlatform(account), new TeamApplication('burnham',account));
   
     blueprints.CodePipelineStack.builder()
